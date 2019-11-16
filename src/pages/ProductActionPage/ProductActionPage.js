@@ -68,22 +68,12 @@ class ProductActionPage extends Component {
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <form onSubmit={this.onSave}>
                     <div className="form-group">
-                        <label>Tên Sản Phẩm: </label>
+                        <label>Tên thiết bị: </label>
                         <input
                             type="text"
                             className="form-control"
                             name="txtName"
                             value={txtName}
-                            onChange={this.onChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Giá: </label>
-                        <input
-                            type="number"
-                            className="form-control"
-                            name="txtPrice"
-                            value={txtPrice}
                             onChange={this.onChange}
                         />
                     </div>
@@ -99,7 +89,7 @@ class ProductActionPage extends Component {
                                 onChange={this.onChange}
                                 checked={chkbStatus}
                             />
-                            Còn Hàng
+                            Hoạt động
                         </label>
                     </div>
                     <Link to="/product-list" className="btn btn-danger mr-10">

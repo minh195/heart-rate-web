@@ -5,16 +5,17 @@ class ProductList extends Component {
         return (
             <div className="panel panel-primary">
                 <div className="panel-heading">
-                    <h3 className="panel-title">Danh Sách Sản Phẩm</h3>
+                    <h3 className="panel-title">Danh sách thiết bị</h3>
                 </div>
                 <div className="panel-body">
                     <table className="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã</th>
+                                <th>ID</th>
                                 <th>Tên</th>
-                                <th>Giá</th>
+                                <th>Thông số</th>
+                                <th>Thời gian</th>
                                 <th>Trạng Thái</th>
                                 <th>Hành Động</th>
                             </tr>

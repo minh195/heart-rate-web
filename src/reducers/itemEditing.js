@@ -6,6 +6,8 @@ const itemEditing = (state = initialState, action) => {
     switch(action.type){
         case Types.EDIT_PRODUCT:
             return action.product;
+        case Types.EDIT_USER:
+            return action.user;
         default:
             return state;
     }

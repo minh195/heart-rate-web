@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class ProductItem extends Component {
+class UserItem extends Component {
 
     onDelete = (id) => {
         if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
@@ -10,24 +10,22 @@ class ProductItem extends Component {
     }
 
     render() {
-        var { product, index } = this.props;
-        var statusName = product.status ? 'Hoạt động' : 'Không hoạt động';
-        var statusClass = product.status ? 'warning' : 'default';
+        var { user, index } = this.props;
+        console.log("device id: ", user.avatar)
         return (
             <tr>
                 <td>{index + 1}</td>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.parameter}</td>
-                <td>{product.date_time}</td>
-                <td>
-                    <span className={`label label-${statusClass}`}>
-                        {statusName}
-                    </span>
-                </td>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.sex}</td>
+                <td>{user.age}</td>
+                <td>{user.email}</td>
+                <td>{user.tel}</td>
+                <td><img src={user.avatar} alt="avatar user" height="42" width="42"/></td>
+                <td>{user.device_id}</td>
                 <td>
                     <Link
-                        to={`/product/${product.id}/edit`}
+                        to={`/user/${user.id}/edit`}
                         className="btn btn-success mr-10"
                     >
                         Sửa
@@ -35,7 +33,7 @@ class ProductItem extends Component {
                     <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => this.onDelete(product.id)}
+                        onClick={() => this.onDelete(user.id)}
                     >
                         Xóa
                     </button>
@@ -45,4 +43,4 @@ class ProductItem extends Component {
     }
 }
 
-export default ProductItem;
+export default UserItem;

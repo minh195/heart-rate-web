@@ -8,8 +8,18 @@ const menus = [
         exact: true
     },
     {
-        name: 'Quản Lý Sản Phẩm',
+        name: 'Quản lý thiết bị',
         to: '/product-list',
+        exact: false
+    },
+    {
+        name: 'Quản lý người dùng',
+        to: '/user-list',
+        exact: false
+    },
+    {
+        name: 'Quản lý chat',
+        to: '/chat-list',
         exact: false
     }
 ];
@@ -50,7 +60,7 @@ class Menu extends Component {
         if(menus.length > 0){
             result = menus.map((menu, index) => {
                 return (
-                    <MenuLink 
+                    <MenuLink
                         key={index}
                         label={menu.name}
                         to={menu.to}
