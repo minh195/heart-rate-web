@@ -11,7 +11,6 @@ class UserItem extends Component {
 
     render() {
         var { user, index } = this.props;
-        console.log("device id: ", user.avatar)
         return (
             <tr>
                 <td>{index + 1}</td>

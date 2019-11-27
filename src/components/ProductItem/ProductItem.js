@@ -13,13 +13,17 @@ class ProductItem extends Component {
         var { product, index } = this.props;
         var statusName = product.status ? 'Hoạt động' : 'Không hoạt động';
         var statusClass = product.status ? 'warning' : 'default';
+
         return (
             <tr>
                 <td>{index + 1}</td>
                 <td>{product.id}</td>
                 <td>{product.name}</td>
                 <td>{product.parameter}</td>
-                <td>{product.date_time}</td>
+                <td>{product.user_id}</td>
+                <td>{Date(product.date_time)}</td>
+                <td>{product.lat}, {product.lng}</td>
+                <td><img src={product.image} alt="avatar user" height="42" width="42"/></td>
                 <td>
                     <span className={`label label-${statusClass}`}>
                         {statusName}

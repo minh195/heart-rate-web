@@ -1,7 +1,12 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { actAddProductRequest, actGetProductRequest, actUpdateProductRequest } from './../../actions/index';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {
+    actAddProductRequest,
+    actFetchUsersRequest,
+    actGetProductRequest,
+    actUpdateProductRequest
+} from './../../actions/index';
+import {connect} from 'react-redux';
 
 class ProductActionPage extends Component {
 
@@ -10,27 +15,37 @@ class ProductActionPage extends Component {
         this.state = {
             id: '',
             txtName: '',
-            txtPrice: '',
-            chkbStatus: ''
+            txtUserId: '',
+            chkbStatus: '',
+            valueOption: '',
+            arrUser: [],
+            userCode: ''
         };
     }
 
     componentDidMount() {
-        var { match } = this.props;
+        var {match} = this.props;
         if (match) {
             var id = match.params.id;
             this.props.onEditProduct(id);
         }
+        this.props.fetchAllUsers();
     }
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps && nextProps.itemEditing){
+    componentWillReceiveProps(nextProps) {
+        if (nextProps && nextProps.itemEditing) {
             var {itemEditing} = nextProps;
             this.setState({
-                id : itemEditing.id,
-                txtName : itemEditing.name,
-                txtPrice : itemEditing.price,
-                chkbStatus : itemEditing.status
+                id: itemEditing.id,
+                txtName: itemEditing.name,
+                txtPrice: itemEditing.price,
+                chkbStatus: itemEditing.status,
+            });
+        }
+        if (nextProps && nextProps.users) {
+            var {users} = nextProps;
+            this.setState({
+                arrUser: users,
             });
         }
     }
@@ -46,14 +61,21 @@ class ProductActionPage extends Component {
 
     onSave = (e) => {
         e.preventDefault();
-        var { id, txtName, txtPrice, chkbStatus } = this.state;
-        var { history } = this.props;
-        var product = {
-            id : id,
-            name : txtName,
-            price : txtPrice,
-            status : chkbStatus
-        };
+        var {id, txtName, valueOption, chkbStatus, userCode} = this.state;
+        var {history} = this.props;
+        if (valueOption === '') {
+          alert("Hãy chọn người dùng!")
+            return
+        } else {
+            var product = {
+                id: id,
+                name: txtName,
+                user_id: valueOption,
+                status: chkbStatus,
+                user_code: userCode
+            };
+        }
+
         if (id) {
             this.props.onUpdateProduct(product);
         } else {
@@ -61,9 +83,19 @@ class ProductActionPage extends Component {
         }
         history.goBack();
     }
-
+    change = (event) => {
+        this.setState({valueOption: event.target.value});
+        this.state.arrUser.map((item, index) =>{
+            if(item.id===event.target.value){
+                this.setState({ userCode: item.user_code})
+            }
+        }
+    )
+    }
     render() {
-        var { txtName, txtPrice, chkbStatus } = this.state;
+        console.log("select drop down:", this.state.valueOption)
+        console.log("value user_code: ", this.state.userCode)
+        var {txtName, valueOption, chkbStatus, arrUser} = this.state;
         return (
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <form onSubmit={this.onSave}>
@@ -76,6 +108,19 @@ class ProductActionPage extends Component {
                             value={txtName}
                             onChange={this.onChange}
                         />
+                    </div>
+                    <div className="form-group">
+                        <label style={{marginRight: 10}}>User ID: </label>
+                        <select
+                            id="lang"
+                            onChange={this.change}
+                            value={valueOption}
+                        >
+                            <option value={''}>Chọn người dùng</option>
+                            {arrUser.map((item, index) => {
+                                return <option value={item.id}>{item.id} - {item.name} </option>
+                            })}
+                        </select>
                     </div>
                     <div className="form-group">
                         <label>Trạng Thái: </label>
@@ -97,7 +142,6 @@ class ProductActionPage extends Component {
                     </Link>
                     <button type="submit" className="btn btn-primary">Lưu Lại</button>
                 </form>
-
             </div>
         );
     }
@@ -106,21 +150,25 @@ class ProductActionPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        itemEditing : state.itemEditing
+        itemEditing: state.itemEditing,
+        users: state.users
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onAddProduct : (product) => {
+        onAddProduct: (product) => {
             dispatch(actAddProductRequest(product));
         },
-        onEditProduct : (id) => {
+        onEditProduct: (id) => {
             dispatch(actGetProductRequest(id));
         },
-        onUpdateProduct : (product) => {
+        onUpdateProduct: (product) => {
             dispatch(actUpdateProductRequest(product));
-        }
+        },
+        fetchAllUsers: () => {
+            dispatch(actFetchUsersRequest());
+        },
     }
 }
 

@@ -82,7 +82,6 @@ export const actGetUserRequest = (id) => {
     return dispatch => {
         return callApi(`users/${id}`, 'GET', null).then(res => {
             dispatch(actGetUser(res.data));
-            console.log("response: ", res.data)
         });
     }
 }

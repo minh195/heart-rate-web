@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {actAddUserRequest, actGetUserRequest, actUpdateUserRequest} from './../../actions/index';
 import {connect} from 'react-redux';
 
+
 class UserActionPage extends Component {
 
     constructor(props) {
@@ -10,15 +11,18 @@ class UserActionPage extends Component {
         this.state = {
             id: '',
             txtName: '',
-            txtPrice: '',
-            chkbStatus: ''
+            txtSex:'',
+            txtAge:'',
+            txtEmail:'',
+            txtPhone:'',
+            txtAvatar:'',
+            txtDevice:''
         };
     }
 
     componentDidMount() {
         var {match} = this.props;
         if (match) {
-            console.log("match", match.params.id)
             var id = match.params.id;
             this.props.onEditUser(id);
         }
@@ -30,8 +34,12 @@ class UserActionPage extends Component {
             this.setState({
                 id: itemEditing.id,
                 txtName: itemEditing.name,
-                txtPrice: itemEditing.price,
-                chkbStatus: itemEditing.status
+                txtSex: itemEditing.sex,
+                txtAge: itemEditing.age,
+                txtEmail: itemEditing.email,
+                txtPhone: itemEditing.tel,
+                txtAvatar: itemEditing.avatar,
+                txtDevice: itemEditing.device_id
             });
         }
     }
@@ -47,13 +55,17 @@ class UserActionPage extends Component {
 
     onSave = (e) => {
         e.preventDefault();
-        var {id, txtName, txtPrice, chkbStatus} = this.state;
+        var {id, txtName, txtSex, txtEmail, txtPhone, txtAvatar, txtDevice, txtAge} = this.state;
         var {history} = this.props;
         var user = {
             id: id,
             name: txtName,
-            price: txtPrice,
-            status: chkbStatus
+            sex: txtSex,
+            email: txtEmail,
+            tel: txtPhone,
+            avatar: txtAvatar,
+            age: txtAge,
+            device_id: txtDevice
         };
         if (id) {
             this.props.onUpdateUser(user);
@@ -64,7 +76,7 @@ class UserActionPage extends Component {
     }
 
     render() {
-        var {txtName, txtPrice} = this.state;
+        var {txtName, txtSex, txtEmail, txtPhone, txtAvatar, txtDevice, txtAge} = this.state;
         return (
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <form onSubmit={this.onSave}>
@@ -79,7 +91,64 @@ class UserActionPage extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label>Trạng Thái: </label>
+                        <label>Giới tính: </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="txtSex"
+                            value={txtSex}
+                            onChange={this.onChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Năm sinh: </label>
+                        <input
+                            type="number"
+                            className="form-control"
+                            name="txtAge"
+                            value={txtAge}
+                            onChange={this.onChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Email: </label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            name="txtEmail"
+                            value={txtEmail}
+                            onChange={this.onChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Số điện thoại: </label>
+                        <input
+                            type="number"
+                            className="form-control"
+                            name="txtPhone"
+                            value={txtPhone}
+                            onChange={this.onChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Avatar URL: </label>
+                        <input
+                            type="url"
+                            className="form-control"
+                            name="txtAvatar"
+                            value={txtAvatar}
+                            onChange={this.onChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Devide ID: </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="txtDevice"
+                            value={txtDevice}
+                            onChange={this.onChange}
+                        />
                     </div>
                     <Link to="/user-list" className="btn btn-danger mr-10">
                         Trở Lại

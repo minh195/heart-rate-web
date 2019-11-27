@@ -4,7 +4,7 @@ import Menu from './components/Menu/Menu';
 import routes from './routes';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
-class App extends Component {
+class Container extends Component {
     render() {
         return (
             <Router>
@@ -38,4 +38,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Container;

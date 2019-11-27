@@ -15,7 +15,10 @@ class ProductList extends Component {
                                 <th>ID</th>
                                 <th>Tên</th>
                                 <th>Thông số</th>
+                                <th>User ID</th>
                                 <th>Thời gian</th>
+                                <th>Vị trí</th>
+                                <th>Hình ảnh</th>
                                 <th>Trạng Thái</th>
                                 <th>Hành Động</th>
                             </tr>
