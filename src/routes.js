@@ -5,22 +5,29 @@ import ProductListPage from './pages/ProductListPage/ProductListPage';
 import ProductActionPage from './pages/ProductActionPage/ProductActionPage';
 import UserActionPage from "./pages/UserActionPage/UserActionPage";
 import UserListPage from "./pages/UserListPage/UserListPage";
+import DoctorListPage from "./pages/DoctorListPage/DoctorListPage";
+import DoctorActionPage from "./pages/DoctorActionPage/DoctorActionPage";
 
 const routes = [
     {
         path: '/',
         exact: true,
-        main: () => <HomePage />
+        main: () => <HomePage/>
     },
     {
         path: '/product-list',
         exact: false,
-        main: () => <ProductListPage />
+        main: () => <ProductListPage/>
     },
     {
         path: '/user-list',
         exact: false,
-        main: () => <UserListPage />
+        main: () => <UserListPage/>
+    },
+    {
+        path: '/doctor-list',
+        exact: false,
+        main: () => <DoctorListPage/>
     },
     {
         path: '/product/add',
@@ -33,6 +40,11 @@ const routes = [
         main: ({history}) => <UserActionPage history={history}/>
     },
     {
+        path: '/doctor/add',
+        exact: false,
+        main: ({history}) => <DoctorActionPage history={history}/>
+    },
+    {
         path: '/product/:id/edit',
         exact: false,
         main: ({match, history}) => <ProductActionPage match={match} history={history}/>
@@ -43,9 +55,14 @@ const routes = [
         main: ({match, history}) => <UserActionPage match={match} history={history}/>
     },
     {
+        path: '/doctor/:id/edit',
+        exact: false,
+        main: ({match, history}) => <DoctorActionPage match={match} history={history}/>
+    },
+    {
         path: '',
         exact: false,
-        main: () => <NotFoundPage />
+        main: () => <NotFoundPage/>
     }
 ];
 

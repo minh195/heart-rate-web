@@ -1,22 +1,19 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {actAddUserRequest, actGetUserRequest, actUpdateUserRequest} from './../../actions/index';
+import {actAddDoctorRequest, actGetDoctorRequest, actUpdateDoctorRequest} from './../../actions/index';
 import {connect} from 'react-redux';
 
 
-class UserActionPage extends Component {
+class DoctorActionPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             id: '',
             txtName: '',
-            txtSex:'',
-            txtAge:'',
-            txtEmail:'',
-            txtPhone:'',
-            txtAvatar:'',
-            txtDevice:''
+            txtEmail: '',
+            txtPhone: '',
+            txtAvatar: ''
         };
     }
 
@@ -24,7 +21,7 @@ class UserActionPage extends Component {
         var {match} = this.props;
         if (match) {
             var id = match.params.id;
-            this.props.onEditUser(id);
+            this.props.onEditDoctor(id);
         }
     }
 
@@ -34,12 +31,9 @@ class UserActionPage extends Component {
             this.setState({
                 id: itemEditing.id,
                 txtName: itemEditing.name,
-                txtSex: itemEditing.sex,
-                txtAge: itemEditing.age,
                 txtEmail: itemEditing.email,
                 txtPhone: itemEditing.tel,
                 txtAvatar: itemEditing.avatar,
-                txtDevice: itemEditing.device_id
             });
         }
     }
@@ -55,28 +49,25 @@ class UserActionPage extends Component {
 
     onSave = (e) => {
         e.preventDefault();
-        var {id, txtName, txtSex, txtEmail, txtPhone, txtAvatar, txtDevice, txtAge} = this.state;
+        var {id, txtName, txtEmail, txtPhone, txtAvatar} = this.state;
         var {history} = this.props;
-        var user = {
+        var doctor = {
             id: id,
             name: txtName,
-            sex: txtSex,
             email: txtEmail,
             tel: txtPhone,
             avatar: txtAvatar,
-            age: txtAge,
-            device_id: txtDevice
         };
         if (id) {
-            this.props.onUpdateUser(user);
+            this.props.onUpdateDoctor(doctor);
         } else {
-            this.props.onAddUser(user);
+            this.props.onAddDoctor(doctor);
         }
         history.goBack();
     }
 
     render() {
-        var {txtName, txtSex, txtEmail, txtPhone, txtAvatar, txtDevice, txtAge} = this.state;
+        var {txtName, txtEmail, txtPhone, txtAvatar} = this.state;
         return (
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <form onSubmit={this.onSave}>
@@ -87,26 +78,6 @@ class UserActionPage extends Component {
                             className="form-control"
                             name="txtName"
                             value={txtName}
-                            onChange={this.onChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Giới tính: </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="txtSex"
-                            value={txtSex}
-                            onChange={this.onChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Năm sinh: </label>
-                        <input
-                            type="number"
-                            className="form-control"
-                            name="txtAge"
-                            value={txtAge}
                             onChange={this.onChange}
                         />
                     </div>
@@ -147,11 +118,9 @@ class UserActionPage extends Component {
                         Lưu Lại
                     </button>
                 </form>
-
             </div>
         );
     }
-
 }
 
 const mapStateToProps = state => {
@@ -162,16 +131,16 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onAddUser: (user) => {
-            dispatch(actAddUserRequest(user));
+        onAddDoctor: (doctor) => {
+            dispatch(actAddDoctorRequest(doctor));
         },
-        onEditUser: (id) => {
-            dispatch(actGetUserRequest(id));
+        onEditDoctor: (id) => {
+            dispatch(actGetDoctorRequest(id));
         },
-        onUpdateUser: (user) => {
-            dispatch(actUpdateUserRequest(user));
+        onUpdateDoctor: (doctor) => {
+            dispatch(actUpdateDoctorRequest(doctor));
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserActionPage);
+export default connect(mapStateToProps, mapDispatchToProps)(DoctorActionPage);

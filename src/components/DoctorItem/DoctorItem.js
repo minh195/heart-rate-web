@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class UserItem extends Component {
+class DoctorItem extends Component {
 
     onDelete = (id) => {
         if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
@@ -10,20 +10,18 @@ class UserItem extends Component {
     }
 
     render() {
-        var { user, index } = this.props;
+        var { doctor, index } = this.props;
         return (
             <tr>
                 <td>{index + 1}</td>
-                <td>{user.id}</td>
-                <td>{user.name}</td>
-                <td>{user.sex}</td>
-                <td>{user.age}</td>
-                <td>{user.email}</td>
-                <td>{user.tel}</td>
-                <td><img src={user.avatar} alt="avatar user" height="42" width="42"/></td>
+                <td>{doctor.id}</td>
+                <td>{doctor.name}</td>
+                <td>{doctor.email}</td>
+                <td>{doctor.tel}</td>
+                <td><img src={doctor.avatar} alt="avatar user" height="42" width="42"/></td>
                 <td>
                     <Link
-                        to={`/user/${user.id}/edit`}
+                        to={`/doctor/${doctor.id}/edit`}
                         className="btn btn-success mr-10"
                     >
                         Sửa
@@ -31,7 +29,7 @@ class UserItem extends Component {
                     <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => this.onDelete(user.id)}
+                        onClick={() => this.onDelete(doctor.id)}
                     >
                         Xóa
                     </button>
@@ -41,4 +39,4 @@ class UserItem extends Component {
     }
 }
 
-export default UserItem;
+export default DoctorItem;

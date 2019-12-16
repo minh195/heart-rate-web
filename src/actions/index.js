@@ -153,3 +153,79 @@ export const actUpdateUser = (user) => {
     }
 }
 
+//------------------------------- doctor --------------------------//
+
+export const actGetDoctorRequest = (id) => {
+    return dispatch => {
+        return callApi(`doctors/${id}`, 'GET', null).then(res => {
+            dispatch(actGetDoctor(res.data));
+        });
+    }
+}
+
+export const actGetDoctor = (doctor) => {
+    return {
+        type : Types.EDIT_DOCTOR,
+        doctor
+    }
+}
+
+export const actFetchDoctorsRequest = () => {
+    return dispatch => {
+        return callApi('doctors', 'GET', null).then(res => {
+            dispatch(actFetchDoctors(res.data));
+        });
+    };
+}
+
+export const actFetchDoctors = (doctors) => {
+    return {
+        type : Types.FETCH_DOCTORS,
+        doctors
+    }
+}
+
+export const actDeleteDoctorRequest = (id) => {
+    return dispatch => {
+        return callApi(`doctors/${id}`, 'DELETE', null).then(res =>{
+            dispatch(actDeleteDoctor(id));
+        })
+    }
+}
+
+export const actDeleteDoctor = (id) => {
+    return {
+        type : Types.DELETE_DOCTOR,
+        id
+    }
+}
+
+export const actAddDoctorRequest = (doctor) => {
+    return dispatch => {
+        return callApi('doctors', 'POST', doctor).then(res => {
+            dispatch(actAddDoctor(res.data));
+        });
+    }
+}
+
+export const actAddDoctor = (doctor) => {
+    return {
+        type : Types.ADD_DOCTOR,
+        doctor
+    }
+}
+
+export const actUpdateDoctorRequest = (doctor) => {
+    return dispatch => {
+        return callApi(`doctors/${doctor.id}`, 'PUT', doctor).then(res => {
+            dispatch(actUpdateDoctor(res.data));
+        });
+    }
+}
+
+export const actUpdateDoctor = (doctor) => {
+    return {
+        type : Types.UPDATE_DOCTOR,
+        doctor
+    }
+}

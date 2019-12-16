@@ -18,8 +18,8 @@ const menus = [
         exact: false
     },
     {
-        name: 'Quản lý chat',
-        to: '/chat-list',
+        name: 'Quản lý bác sĩ',
+        to: '/doctor-list',
         exact: false
     }
 ];

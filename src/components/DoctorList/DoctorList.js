@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-class UserList extends Component {
+class DoctorList extends Component {
     render() {
         return (
             <div className="panel panel-primary">
                 <div className="panel-heading">
-                    <h3 className="panel-title">Danh sách người dùng</h3>
+                    <h3 className="panel-title">Danh sách bác sĩ</h3>
                 </div>
                 <div className="panel-body">
                     <table className="table table-bordered table-hover">
@@ -14,8 +14,6 @@ class UserList extends Component {
                             <th>STT</th>
                             <th>ID</th>
                             <th>Tên</th>
-                            <th>Giới tính</th>
-                            <th>Năm sinh</th>
                             <th>Email</th>
                             <th>Số điện thoại</th>
                             <th>Avatar</th>
@@ -32,4 +30,4 @@ class UserList extends Component {
     }
 }
 
-export default UserList;
+export default DoctorList;

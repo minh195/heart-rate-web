@@ -8,6 +8,8 @@ const itemEditing = (state = initialState, action) => {
             return action.product;
         case Types.EDIT_USER:
             return action.user;
+        case Types.EDIT_DOCTOR:
+            return action.doctor;
         default:
             return state;
     }
