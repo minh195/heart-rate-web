@@ -21,6 +21,11 @@ const menus = [
         name: 'Quản lý bác sĩ',
         to: '/doctor-list',
         exact: false
+    },
+    {
+        name: 'Đăng xuất',
+        to: '/log-out',
+        extract:false
     }
 ];
 

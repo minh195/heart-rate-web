@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 class HomePage extends Component {
     render() {
         return (
-            <div className="container">
-                <h1>Website quản lý dữ liệu thiết bị y tế</h1>
-                <p>Author: Minh, Huy, Huy</p>
+            <div className="header">
+                <h1>Quản lý thông tin thiết bị y tế</h1>
+                <p>A website created by Huy, Huy, Minh</p>
             </div>
         );
     }

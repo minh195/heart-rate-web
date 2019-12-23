@@ -19,6 +19,7 @@ class UserList extends Component {
                             <th>Email</th>
                             <th>Số điện thoại</th>
                             <th>Avatar</th>
+                            <th>ID Bác sĩ</th>
                             <th>Hành Động</th>
                         </tr>
                         </thead>

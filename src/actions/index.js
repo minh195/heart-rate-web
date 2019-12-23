@@ -11,14 +11,14 @@ export const actFetchProductsRequest = () => {
 
 export const actFetchProducts = (products) => {
     return {
-        type : Types.FETCH_PRODUCTS,
+        type: Types.FETCH_PRODUCTS,
         products
     }
 }
 
 export const actDeleteProductRequest = (id) => {
     return dispatch => {
-        return callApi(`products/${id}`, 'DELETE', null).then(res =>{
+        return callApi(`products/${id}`, 'DELETE', null).then(res => {
             dispatch(actDeleteProduct(id));
         })
     }
@@ -26,7 +26,7 @@ export const actDeleteProductRequest = (id) => {
 
 export const actDeleteProduct = (id) => {
     return {
-        type : Types.DELETE_PRODUCT,
+        type: Types.DELETE_PRODUCT,
         id
     }
 }
@@ -41,7 +41,7 @@ export const actAddProductRequest = (product) => {
 
 export const actAddProduct = (product) => {
     return {
-        type : Types.ADD_PRODUCT,
+        type: Types.ADD_PRODUCT,
         product
     }
 }
@@ -57,7 +57,7 @@ export const actGetProductRequest = (id) => {
 
 export const actGetProduct = (product) => {
     return {
-        type : Types.EDIT_PRODUCT,
+        type: Types.EDIT_PRODUCT,
         product
     }
 }
@@ -72,7 +72,7 @@ export const actUpdateProductRequest = (product) => {
 
 export const actUpdateProduct = (product) => {
     return {
-        type : Types.UPDATE_PRODUCT,
+        type: Types.UPDATE_PRODUCT,
         product
     }
 }
@@ -88,7 +88,7 @@ export const actGetUserRequest = (id) => {
 
 export const actGetUser = (user) => {
     return {
-        type : Types.EDIT_USER,
+        type: Types.EDIT_USER,
         user
     }
 }
@@ -103,14 +103,14 @@ export const actFetchUsersRequest = () => {
 
 export const actFetchUsers = (users) => {
     return {
-        type : Types.FETCH_USERS,
+        type: Types.FETCH_USERS,
         users
     }
 }
 
 export const actDeleteUserRequest = (id) => {
     return dispatch => {
-        return callApi(`users/${id}`, 'DELETE', null).then(res =>{
+        return callApi(`users/${id}`, 'DELETE', null).then(res => {
             dispatch(actDeleteUser(id));
         })
     }
@@ -118,7 +118,7 @@ export const actDeleteUserRequest = (id) => {
 
 export const actDeleteUser = (id) => {
     return {
-        type : Types.DELETE_USER,
+        type: Types.DELETE_USER,
         id
     }
 }
@@ -133,7 +133,7 @@ export const actAddUserRequest = (user) => {
 
 export const actAddUser = (user) => {
     return {
-        type : Types.ADD_USER,
+        type: Types.ADD_USER,
         user
     }
 }
@@ -148,7 +148,7 @@ export const actUpdateUserRequest = (user) => {
 
 export const actUpdateUser = (user) => {
     return {
-        type : Types.UPDATE_USER,
+        type: Types.UPDATE_USER,
         user
     }
 }
@@ -165,7 +165,7 @@ export const actGetDoctorRequest = (id) => {
 
 export const actGetDoctor = (doctor) => {
     return {
-        type : Types.EDIT_DOCTOR,
+        type: Types.EDIT_DOCTOR,
         doctor
     }
 }
@@ -180,14 +180,14 @@ export const actFetchDoctorsRequest = () => {
 
 export const actFetchDoctors = (doctors) => {
     return {
-        type : Types.FETCH_DOCTORS,
+        type: Types.FETCH_DOCTORS,
         doctors
     }
 }
 
 export const actDeleteDoctorRequest = (id) => {
     return dispatch => {
-        return callApi(`doctors/${id}`, 'DELETE', null).then(res =>{
+        return callApi(`doctors/${id}`, 'DELETE', null).then(res => {
             dispatch(actDeleteDoctor(id));
         })
     }
@@ -195,7 +195,7 @@ export const actDeleteDoctorRequest = (id) => {
 
 export const actDeleteDoctor = (id) => {
     return {
-        type : Types.DELETE_DOCTOR,
+        type: Types.DELETE_DOCTOR,
         id
     }
 }
@@ -210,7 +210,7 @@ export const actAddDoctorRequest = (doctor) => {
 
 export const actAddDoctor = (doctor) => {
     return {
-        type : Types.ADD_DOCTOR,
+        type: Types.ADD_DOCTOR,
         doctor
     }
 }
@@ -225,7 +225,7 @@ export const actUpdateDoctorRequest = (doctor) => {
 
 export const actUpdateDoctor = (doctor) => {
     return {
-        type : Types.UPDATE_DOCTOR,
+        type: Types.UPDATE_DOCTOR,
         doctor
     }
 }

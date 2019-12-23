@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {actAddUserRequest, actGetUserRequest, actUpdateUserRequest} from './../../actions/index';
+import {
+    actAddUserRequest,
+    actFetchDoctorsRequest,
+    actGetUserRequest,
+    actUpdateUserRequest
+} from './../../actions/index';
 import {connect} from 'react-redux';
 
 
@@ -11,12 +16,15 @@ class UserActionPage extends Component {
         this.state = {
             id: '',
             txtName: '',
-            txtSex:'',
-            txtAge:'',
-            txtEmail:'',
-            txtPhone:'',
-            txtAvatar:'',
-            txtDevice:''
+            txtSex: '',
+            txtAge: '',
+            txtEmail: '',
+            txtPhone: '',
+            txtAvatar: '',
+            txtDevice: '',
+            arrDoctor: [],
+            valueOption: '',
+            doctorCode: ''
         };
     }
 
@@ -26,6 +34,9 @@ class UserActionPage extends Component {
             var id = match.params.id;
             this.props.onEditUser(id);
         }
+        fetch('https://5dcd7cd3d795470014e4d1cd.mockapi.io/doctors')
+            .then(response => response.json())
+            .then(arrDoctor => this.setState({arrDoctor}));
     }
 
     componentWillReceiveProps(nextProps) {
@@ -55,18 +66,25 @@ class UserActionPage extends Component {
 
     onSave = (e) => {
         e.preventDefault();
-        var {id, txtName, txtSex, txtEmail, txtPhone, txtAvatar, txtDevice, txtAge} = this.state;
+        var {id, txtName, txtSex, txtEmail, txtPhone, txtAvatar, valueOption, txtAge, doctorCode} = this.state;
         var {history} = this.props;
-        var user = {
-            id: id,
-            name: txtName,
-            sex: txtSex,
-            email: txtEmail,
-            tel: txtPhone,
-            avatar: txtAvatar,
-            age: txtAge,
-            device_id: txtDevice
-        };
+
+        if (valueOption === '') {
+            alert("Hãy chọn bác sĩ!")
+            return
+        } else {
+            var user = {
+                id: id,
+                name: txtName,
+                sex: txtSex,
+                email: txtEmail,
+                tel: txtPhone,
+                avatar: txtAvatar,
+                age: txtAge,
+                doctor_code: doctorCode,
+                doctor_id: valueOption
+            };
+        }
         if (id) {
             this.props.onUpdateUser(user);
         } else {
@@ -74,9 +92,18 @@ class UserActionPage extends Component {
         }
         history.goBack();
     }
+    change = (event) => {
+        this.setState({valueOption: event.target.value});
+        this.state.arrDoctor.map((item, index) => {
+                if (item.id === event.target.value) {
+                    this.setState({doctorCode: item.doctor_code})
+                }
+            }
+        )
+    }
 
     render() {
-        var {txtName, txtSex, txtEmail, txtPhone, txtAvatar, txtDevice, txtAge} = this.state;
+        var {txtName, txtSex, txtEmail, txtPhone, txtAvatar, arrDoctor, txtAge, valueOption} = this.state;
         return (
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <form onSubmit={this.onSave}>
@@ -140,6 +167,19 @@ class UserActionPage extends Component {
                             onChange={this.onChange}
                         />
                     </div>
+                    <div className="form-group">
+                        <label style={{marginRight: 10}}>ID Bác sĩ </label>
+                        <select
+                            id="lang"
+                            onChange={this.change}
+                            value={valueOption}
+                        >
+                            <option value={''}>Chọn bác sĩ</option>
+                            {arrDoctor.map((item, index) => {
+                                return <option value={item.id}>{item.id} - {item.name} </option>
+                            })}
+                        </select>
+                    </div>
                     <Link to="/user-list" className="btn btn-danger mr-10">
                         Trở Lại
                     </Link>
@@ -147,7 +187,6 @@ class UserActionPage extends Component {
                         Lưu Lại
                     </button>
                 </form>
-
             </div>
         );
     }
@@ -156,7 +195,8 @@ class UserActionPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        itemEditing: state.itemEditing
+        itemEditing: state.itemEditing,
+        doctors: state.doctors
     }
 }
 
@@ -170,7 +210,10 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onUpdateUser: (user) => {
             dispatch(actUpdateUserRequest(user));
-        }
+        },
+        fetchAllDoctors: () => {
+            dispatch(actFetchDoctorsRequest());
+        },
     }
 }
 

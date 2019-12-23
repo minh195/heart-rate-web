@@ -8,7 +8,7 @@ const appReducers = combineReducers({
     products,
     users,
     doctors,
-    itemEditing
+    itemEditing,
 });
 
 export default appReducers;

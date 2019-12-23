@@ -19,7 +19,8 @@ class ProductActionPage extends Component {
             chkbStatus: '',
             valueOption: '',
             arrUser: [],
-            userCode: ''
+            userCode: '',
+            txtImage:''
         };
     }
 
@@ -29,7 +30,9 @@ class ProductActionPage extends Component {
             var id = match.params.id;
             this.props.onEditProduct(id);
         }
-        this.props.fetchAllUsers();
+        fetch('https://5dcd7cd3d795470014e4d1cd.mockapi.io/users')
+            .then(response => response.json())
+            .then(arrUser => this.setState({arrUser}));
     }
 
     componentWillReceiveProps(nextProps) {
@@ -40,14 +43,10 @@ class ProductActionPage extends Component {
                 txtName: itemEditing.name,
                 txtPrice: itemEditing.price,
                 chkbStatus: itemEditing.status,
+                txtImage:itemEditing.image
             });
         }
-        if (nextProps && nextProps.users) {
-            var {users} = nextProps;
-            this.setState({
-                arrUser: users,
-            });
-        }
+
     }
 
     onChange = (e) => {
@@ -61,10 +60,10 @@ class ProductActionPage extends Component {
 
     onSave = (e) => {
         e.preventDefault();
-        var {id, txtName, valueOption, chkbStatus, userCode} = this.state;
+        var {id, txtName, valueOption, chkbStatus, userCode, txtImage} = this.state;
         var {history} = this.props;
         if (valueOption === '') {
-          alert("Hãy chọn người dùng!")
+            alert("Hãy chọn người dùng!")
             return
         } else {
             var product = {
@@ -72,7 +71,8 @@ class ProductActionPage extends Component {
                 name: txtName,
                 user_id: valueOption,
                 status: chkbStatus,
-                user_code: userCode
+                user_code: userCode,
+                image: txtImage
             };
         }
 
@@ -85,17 +85,16 @@ class ProductActionPage extends Component {
     }
     change = (event) => {
         this.setState({valueOption: event.target.value});
-        this.state.arrUser.map((item, index) =>{
-            if(item.id===event.target.value){
-                this.setState({ userCode: item.user_code})
+        this.state.arrUser.map((item, index) => {
+                if (item.id === event.target.value) {
+                    this.setState({userCode: item.user_code})
+                }
             }
-        }
-    )
+        )
     }
+
     render() {
-        console.log("select drop down:", this.state.valueOption)
-        console.log("value user_code: ", this.state.userCode)
-        var {txtName, valueOption, chkbStatus, arrUser} = this.state;
+        var {txtName, valueOption, chkbStatus, arrUser,txtImage} = this.state;
         return (
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <form onSubmit={this.onSave}>
@@ -106,6 +105,16 @@ class ProductActionPage extends Component {
                             className="form-control"
                             name="txtName"
                             value={txtName}
+                            onChange={this.onChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Hình ảnh: </label>
+                        <input
+                            type="url"
+                            className="form-control"
+                            name="txtImage"
+                            value={txtImage}
                             onChange={this.onChange}
                         />
                     </div>

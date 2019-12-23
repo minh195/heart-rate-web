@@ -111,7 +111,7 @@ class DoctorActionPage extends Component {
                             onChange={this.onChange}
                         />
                     </div>
-                    <Link to="/user-list" className="btn btn-danger mr-10">
+                    <Link to="/doctor-list" className="btn btn-danger mr-10">
                         Trở Lại
                     </Link>
                     <button type="submit" className="btn btn-primary">

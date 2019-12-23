@@ -21,6 +21,7 @@ class UserItem extends Component {
                 <td>{user.email}</td>
                 <td>{user.tel}</td>
                 <td><img src={user.avatar} alt="avatar user" height="42" width="42"/></td>
+                <td>{user.doctor_code}</td>
                 <td>
                     <Link
                         to={`/user/${user.id}/edit`}
