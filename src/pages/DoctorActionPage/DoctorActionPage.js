@@ -13,35 +13,43 @@ class DoctorActionPage extends Component {
             txtName: '',
             txtEmail: '',
             txtPhone: '',
-            txtAvatar: ''
+            txtAvatar: '',
+            txtSex: '',
+            txtAge: '',
+            txtUserName: '',
+            txtPassword: ''
         };
     }
 
     componentDidMount() {
-        var {match} = this.props;
+        const {match} = this.props;
         if (match) {
-            var id = match.params.id;
+            const id = match.params.id;
             this.props.onEditDoctor(id);
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps && nextProps.itemEditing) {
-            var {itemEditing} = nextProps;
+            const {itemEditing} = nextProps;
             this.setState({
                 id: itemEditing.id,
                 txtName: itemEditing.name,
                 txtEmail: itemEditing.email,
                 txtPhone: itemEditing.tel,
                 txtAvatar: itemEditing.avatar,
+                txtSex: itemEditing.sex,
+                txtAge: itemEditing.age,
+                txtUserName: itemEditing.user_name,
+                txtPassword: itemEditing.password
             });
         }
     }
 
     onChange = (e) => {
-        var target = e.target;
-        var name = target.name;
-        var value = target.type === 'checkbox' ? target.checked : target.value;
+        const target = e.target;
+        const name = target.name;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({
             [name]: value
         });
@@ -49,14 +57,28 @@ class DoctorActionPage extends Component {
 
     onSave = (e) => {
         e.preventDefault();
-        var {id, txtName, txtEmail, txtPhone, txtAvatar} = this.state;
-        var {history} = this.props;
-        var doctor = {
+        const {
+            id,
+            txtName,
+            txtEmail,
+            txtPhone,
+            txtAvatar,
+            txtSex,
+            txtAge,
+            txtUserName,
+            txtPassword
+        } = this.state;
+        const {history} = this.props;
+        const doctor = {
             id: id,
             name: txtName,
             email: txtEmail,
             tel: txtPhone,
             avatar: txtAvatar,
+            sex: txtSex,
+            age: txtAge,
+            user_name: txtUserName,
+            password: txtPassword
         };
         if (id) {
             this.props.onUpdateDoctor(doctor);
@@ -67,18 +89,72 @@ class DoctorActionPage extends Component {
     }
 
     render() {
-        var {txtName, txtEmail, txtPhone, txtAvatar} = this.state;
+        const {
+            txtName,
+            txtEmail,
+            txtPhone,
+            txtAvatar,
+            txtSex,
+            txtAge,
+            txtUserName,
+            txtPassword
+        } = this.state;
         return (
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <form onSubmit={this.onSave}>
                     <div className="form-group">
-                        <label>Tên người dùng: </label>
+                        <label>Tên đăng nhập: </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="txtUserName"
+                            value={txtUserName}
+                            onChange={this.onChange}
+                            required={true}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Mật khẩu: </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="txtPassword"
+                            value={txtPassword}
+                            onChange={this.onChange}
+                            required={true}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Tên bác sĩ: </label>
                         <input
                             type="text"
                             className="form-control"
                             name="txtName"
                             value={txtName}
                             onChange={this.onChange}
+                            required={true}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Giới tính: </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="txtSex"
+                            value={txtSex}
+                            onChange={this.onChange}
+                            required={true}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Năm sinh: </label>
+                        <input
+                            type="number"
+                            className="form-control"
+                            name="txtAge"
+                            value={txtAge}
+                            onChange={this.onChange}
+                            required={true}
                         />
                     </div>
                     <div className="form-group">
@@ -89,6 +165,7 @@ class DoctorActionPage extends Component {
                             name="txtEmail"
                             value={txtEmail}
                             onChange={this.onChange}
+                            required={true}
                         />
                     </div>
                     <div className="form-group">
@@ -99,10 +176,11 @@ class DoctorActionPage extends Component {
                             name="txtPhone"
                             value={txtPhone}
                             onChange={this.onChange}
+                            required={true}
                         />
                     </div>
                     <div className="form-group">
-                        <label>Avatar URL: </label>
+                        <label>Link ảnh đại diện: </label>
                         <input
                             type="url"
                             className="form-control"

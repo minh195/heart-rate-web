@@ -5,7 +5,7 @@ class HomePage extends Component {
         return (
             <div className="header">
                 <h1>Quản lý thông tin thiết bị y tế</h1>
-                <p>A website created by Huy, Huy, Minh</p>
+                <p>A website created by Minh</p>
             </div>
         );
     }

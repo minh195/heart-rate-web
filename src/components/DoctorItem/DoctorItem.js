@@ -17,8 +17,10 @@ class DoctorItem extends Component {
                 <td>{doctor.id}</td>
                 <td>{doctor.name}</td>
                 <td>{doctor.email}</td>
+                <td>{doctor.sex}</td>
+                <td>{doctor.age}</td>
                 <td>{doctor.tel}</td>
-                <td><img src={doctor.avatar} alt="avatar user" height="42" width="42"/></td>
+                <td><img src={doctor.avatar} alt="avatar user" height="60" width="60"/></td>
                 <td>
                     <Link
                         to={`/doctor/${doctor.id}/edit`}

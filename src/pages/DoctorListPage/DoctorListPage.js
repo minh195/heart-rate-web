@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import DoctorList from "../../components/DoctorList/DoctorList";
 import DoctorItem from "../../components/DoctorItem/DoctorItem";
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { actFetchDoctorsRequest, actDeleteDoctorRequest} from "./../../actions/index";
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {actFetchDoctorsRequest, actDeleteDoctorRequest} from "./../../actions/index";
 
 class UserListPage extends Component {
 
@@ -16,7 +16,7 @@ class UserListPage extends Component {
     }
 
     render() {
-        var { doctors } = this.props;
+        var {doctors} = this.props;
         return (
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <Link to="/doctor/add" className="btn btn-info mb-10">
@@ -56,10 +56,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchAllDoctors : () => {
+        fetchAllDoctors: () => {
             dispatch(actFetchDoctorsRequest());
         },
-        onDeleteDoctor : (id) => {
+        onDeleteDoctor: (id) => {
             dispatch(actDeleteDoctorRequest(id));
         }
     }

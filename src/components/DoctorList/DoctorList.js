@@ -15,6 +15,8 @@ class DoctorList extends Component {
                             <th>ID</th>
                             <th>Tên</th>
                             <th>Email</th>
+                            <th>Giới tính</th>
+                            <th>Năm sinh</th>
                             <th>Số điện thoại</th>
                             <th>Avatar</th>
                             <th>Hành Động</th>

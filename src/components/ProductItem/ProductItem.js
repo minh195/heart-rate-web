@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import moment from "moment"
 class ProductItem extends Component {
 
     onDelete = (id) => {
@@ -10,10 +10,9 @@ class ProductItem extends Component {
     }
 
     render() {
-        var { product, index } = this.props;
+        var {product, index} = this.props;
         var statusName = product.status ? 'Hoạt động' : 'Không hoạt động';
         var statusClass = product.status ? 'warning' : 'default';
-
         return (
             <tr>
                 <td>{index + 1}</td>
@@ -21,9 +20,9 @@ class ProductItem extends Component {
                 <td>{product.name}</td>
                 <td>{product.user_id}</td>
                 <td>{product.parameter}</td>
-                <td>{Date(product.date_time)}</td>
+                <td>{moment(product.date_time).format("LT")} {moment(product.date_time).format("l")}</td>
                 <td>{product.lat}, {product.lng}</td>
-                <td><img src={product.image} alt="avatar user" height="42" width="42"/></td>
+                <td><img src={product.image} alt="device image" height="60" width="60"/></td>
                 <td>
                     <span className={`label label-${statusClass}`}>
                         {statusName}

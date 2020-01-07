@@ -63,6 +63,11 @@ const routes = [
         path: '',
         exact: false,
         main: () => <NotFoundPage/>
+    },
+    {
+        path: '/sign-in',
+        exact: false,
+        main: () => <NotFoundPage/>
     }
 ];
 

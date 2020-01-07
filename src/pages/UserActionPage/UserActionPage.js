@@ -24,14 +24,16 @@ class UserActionPage extends Component {
             txtDevice: '',
             arrDoctor: [],
             valueOption: '',
-            doctorCode: ''
+            doctorCode: '',
+            txtUserName: '',
+            txtPassword: '',
         };
     }
 
     componentDidMount() {
-        var {match} = this.props;
+        const {match} = this.props;
         if (match) {
-            var id = match.params.id;
+            const id = match.params.id;
             this.props.onEditUser(id);
         }
         fetch('https://5dcd7cd3d795470014e4d1cd.mockapi.io/doctors')
@@ -41,7 +43,7 @@ class UserActionPage extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps && nextProps.itemEditing) {
-            var {itemEditing} = nextProps;
+            const {itemEditing} = nextProps;
             this.setState({
                 id: itemEditing.id,
                 txtName: itemEditing.name,
@@ -50,15 +52,17 @@ class UserActionPage extends Component {
                 txtEmail: itemEditing.email,
                 txtPhone: itemEditing.tel,
                 txtAvatar: itemEditing.avatar,
-                txtDevice: itemEditing.device_id
+                txtDevice: itemEditing.device_id,
+                txtUserName: itemEditing.user_name,
+                txtPassword: itemEditing.password
             });
         }
     }
 
     onChange = (e) => {
-        var target = e.target;
-        var name = target.name;
-        var value = target.type === 'checkbox' ? target.checked : target.value;
+        const target = e.target;
+        const name = target.name;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({
             [name]: value
         });
@@ -66,7 +70,19 @@ class UserActionPage extends Component {
 
     onSave = (e) => {
         e.preventDefault();
-        var {id, txtName, txtSex, txtEmail, txtPhone, txtAvatar, valueOption, txtAge, doctorCode} = this.state;
+        const {
+            id,
+            txtName,
+            txtSex,
+            txtEmail,
+            txtPhone,
+            txtAvatar,
+            valueOption,
+            txtAge,
+            doctorCode,
+            txtUserName,
+            txtPassword,
+        } = this.state;
         var {history} = this.props;
 
         if (valueOption === '') {
@@ -82,7 +98,9 @@ class UserActionPage extends Component {
                 avatar: txtAvatar,
                 age: txtAge,
                 doctor_code: doctorCode,
-                doctor_id: valueOption
+                doctor_id: valueOption,
+                user_name: txtUserName,
+                password: txtPassword,
             };
         }
         if (id) {
@@ -103,10 +121,43 @@ class UserActionPage extends Component {
     }
 
     render() {
-        var {txtName, txtSex, txtEmail, txtPhone, txtAvatar, arrDoctor, txtAge, valueOption} = this.state;
+        const {
+            txtName,
+            txtSex,
+            txtEmail,
+            txtPhone,
+            txtAvatar,
+            arrDoctor,
+            txtAge,
+            valueOption,
+            txtUserName,
+            txtPassword
+        } = this.state;
         return (
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <form onSubmit={this.onSave}>
+                    <div className="form-group">
+                        <label>Tên đăng nhập: </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="txtUserName"
+                            value={txtUserName}
+                            onChange={this.onChange}
+                            required={true}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Mật khẩu: </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="txtPassword"
+                            value={txtPassword}
+                            onChange={this.onChange}
+                            required={true}
+                        />
+                    </div>
                     <div className="form-group">
                         <label>Tên người dùng: </label>
                         <input
@@ -115,6 +166,7 @@ class UserActionPage extends Component {
                             name="txtName"
                             value={txtName}
                             onChange={this.onChange}
+                            required={true}
                         />
                     </div>
                     <div className="form-group">
@@ -125,6 +177,7 @@ class UserActionPage extends Component {
                             name="txtSex"
                             value={txtSex}
                             onChange={this.onChange}
+                            required={true}
                         />
                     </div>
                     <div className="form-group">
@@ -135,6 +188,7 @@ class UserActionPage extends Component {
                             name="txtAge"
                             value={txtAge}
                             onChange={this.onChange}
+                            required={true}
                         />
                     </div>
                     <div className="form-group">
@@ -145,6 +199,7 @@ class UserActionPage extends Component {
                             name="txtEmail"
                             value={txtEmail}
                             onChange={this.onChange}
+                            required={true}
                         />
                     </div>
                     <div className="form-group">
@@ -155,10 +210,11 @@ class UserActionPage extends Component {
                             name="txtPhone"
                             value={txtPhone}
                             onChange={this.onChange}
+                            required={true}
                         />
                     </div>
                     <div className="form-group">
-                        <label>Avatar URL: </label>
+                        <label>Link ảnh đại diện: </label>
                         <input
                             type="url"
                             className="form-control"
@@ -187,6 +243,8 @@ class UserActionPage extends Component {
                         Lưu Lại
                     </button>
                 </form>
+                <div className="btn">
+                </div>
             </div>
         );
     }

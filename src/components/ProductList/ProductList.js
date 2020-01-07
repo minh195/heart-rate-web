@@ -15,7 +15,7 @@ class ProductList extends Component {
                                 <th>ID</th>
                                 <th>Tên</th>
                                 <th>ID Người dùng</th>
-                                <th>Thông số</th>
+                                <th>Thông số gần nhất (Nhịp/phút)</th>
                                 <th>Thời gian</th>
                                 <th>Vị trí</th>
                                 <th>Hình ảnh</th>

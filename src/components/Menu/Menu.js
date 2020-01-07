@@ -24,9 +24,9 @@ const menus = [
     },
     {
         name: 'Đăng xuất',
-        to: '/log-out',
-        extract:false
-    }
+        to: '/sign-in',
+        exact: false
+    },
 ];
 
 const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
